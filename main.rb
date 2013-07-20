@@ -6,11 +6,8 @@ require 'json'
 set :bind, '0.0.0.0'
 
 def configured_repos
-  [ { :key => 'puppet', :name => 'Puppet' },
-    { :key => 'facter', :name => 'Facter' },
-    { :key => 'hiera', :name => 'Hiera' },
-    { :key => 'puppetdb', :name => 'PuppetDB' },
-    { :key => 'puppetlabs-stdlib', :name => 'Stdlib' } ]
+  d = Dir.new("repos")
+  repos = d.entries.reject {|e| e =~ /\A\./ }.map {|e| {:key => e, :name => e.capitalize} }
 end
 
 def configured_timeframes
@@ -31,6 +28,7 @@ def author_substitutions
     "rahul" => "Rahul Gopinath",
     "Lindsey" => "Lindsey Smith",
     "stahnma" => "Mike Stahnke",
+    "rlinehan" => "Ruth Linehan",
   }
 end
 
